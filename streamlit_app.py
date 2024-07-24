@@ -1,6 +1,7 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col
+import requests
 
 # Write directly to the app
 st.title("Customize Your Smoothie :cup_with_straw:")
@@ -35,6 +36,7 @@ ingredients_list = st.multiselect(
 )
 
 # Our ingredients variable is an object or data type called a LIST. So it's a list in the traditional sense of the word, but it is also a datatype or object called a LIST. A LIST is different than a DATAFRAME which is also different from a STRING!
+# Let's Get the Fruityvice Data to Show Data for the Fruits Chosen
 if ingredients_list:
     # st.write(ingredients_list)
     # st.text(ingredients_list)
@@ -45,6 +47,8 @@ if ingredients_list:
     # Add the FOR Block
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+        fv_df = st.dataframe(data = fruityvice_response.json(), use_container_width = True)
         
     # Output the String 
     # st.write(ingredients_string)
@@ -64,9 +68,9 @@ if ingredients_list:
         st.success('Your Smoothie is ordered, '+name_on_order+'!', icon="✅")
 
 # Call the Fruityvice API from Our SniS App
-import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+# import requests
+# fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 # Let's Expose the JSON Data Inside the Response Object
 # st.text(fruityvice_response.json())
 # Let's Put the JSON into a Dataframe
-fv_df = st.dataframe(data = fruityvice_response.json(), use_container_width = True)
+# fv_df = st.dataframe(data = fruityvice_response.json(), use_container_width = True)
