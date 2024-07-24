@@ -64,12 +64,6 @@ if ingredients_list:
             st.subheader(fruit_chosen + ' Nutrition Information')
             fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + search_on)
             fv_df = st.dataframe(data = fruityvice_response.json(), use_container_width = True)
-            # try:
-            #     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + search_on)
-            #     fruityvice_response.raise_for_status()  # This will raise an exception for HTTP errors
-            #     fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
-            # except requests.exceptions.RequestException as e:
-            #     st.error(f"Could not retrieve data for {fruit_chosen}: {e}")
         else:
             st.error(f"No search value available for {fruit_chosen}")
         
