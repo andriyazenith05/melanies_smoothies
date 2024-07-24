@@ -66,4 +66,4 @@ if ingredients_list:
 # Call the Fruityvice API from Our SniS App
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-st.text(fruityvice_response)
+st.text(fruityvice_response.json())
